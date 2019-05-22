@@ -1,3 +1,29 @@
+from mcpi.minecraft import Minecraft
+import time
+
+mc=Minecraft.create()
+#mc=Minecraft.create("10.163.80.195",4711)
+
+file=open('floor.csv')
+data=file.read()
+print(data)
+
+floor=[]
+rows=data.split("\n")
+print(rows)
+
+for row in rows:
+    cols=row.split(",")
+    print(cols)
+    print(len(cols))
+    if len(cols)>1:
+        floor.append(cols)
+
+print(floor[1],[3])
+
+
+stayed_time=0
+
 pos=mc.player.getTilePos()
  
 
@@ -9,8 +35,19 @@ for x in range(10):
     mc.setBlock(pos.x+x,pos.y,pos.z,45)
     mc.setBlock(pos.x+x,pos.y+7,pos.z,1)
     for z in range(10):
-        mc.setBlock(pos.x+x,pos.y-1,pos.z+z,5,3)
         mc.setBlock(pos.x+x,pos.y+8,pos.z+z,20)
+        
+        m=floor[x][z]
+        if m is '1':
+          mc.setBlock(pos.x+x,pos.y-1,pos.z+z,35,6)
+        else:
+          mc.setBlock(pos.x+x,pos.y-1,pos.z+z,5,3)
+        
+
+     
+
+      
+        
         
 for z in range(10):
     mc.setBlock(pos.x,pos.y,pos.z+z,45)
@@ -41,4 +78,26 @@ for y in range(7):
       mc.setBlock(pos.x+x,pos.y+y,pos.z,45)
       for w in range(2):
        mc.setBlock(pos.x+5,pos.y+w,pos.z,0)
+      
+
+
+
+       
+
+      
+
+while True:
+    print("stay_time"+str(stayed_time))
+    time.sleep(0.5)
+    pos=mc.player.getTilePos()
+    mc.postToChat("please goto home x=-53 y=1 z=--122 for 15s to fly")
+    mc.postToChat("x:"+str(pos.x)+"y:"+str(pos.y)+"z:"+str(pos.z)) 
+    if pos.x>=-54 and pos.x<=-52 and pos.y==1 and pos.z>=-123 and pos.z<=-121:
+        mc.postToChat("welcome home")
+        stayed_time=stayed_time+1
+        if stayed_time>=30:
+            mc.player.setTilePos(-53,10,-122)
+            stayed_time=0
+    else:
+        stayed_time=0
       
