@@ -1,10 +1,23 @@
+pos=mc.player.getTilePos()
+ 
+
+pos.y2=pos.y+5
+pos.x2=pos.x+4
+pos.z2=pos.z+4
+
 for x in range(10):
     mc.setBlock(pos.x+x,pos.y,pos.z,45)
     mc.setBlock(pos.x+x,pos.y+7,pos.z,1)
-
+    for z in range(10):
+        mc.setBlock(pos.x+x,pos.y-1,pos.z+z,5,3)
+        mc.setBlock(pos.x+x,pos.y+8,pos.z+z,20)
+        
 for z in range(10):
     mc.setBlock(pos.x,pos.y,pos.z+z,45)
     mc.setBlock(pos.x,pos.y+7,pos.z+z,1)
+    for x in range(10):
+        mc.setBlock(pos.x+z,pos.y-1,pos.z+z,5,3)
+        mc.setBlock(pos.x+z,pos.y+8,pos.z+z,20)
     
 for x in range(10):
     mc.setBlock(pos.x+x,pos.y,pos.z+z,45)
@@ -19,9 +32,13 @@ for y in range(7):
     for z in range(10):
      mc.setBlock(pos.x+x,pos.y+y,pos.z+z,45)
      mc.setBlock(pos.x,pos.y+y,pos.z+z,45)
+     for w in range(2):
+      mc.setBlock(pos.x,pos.y2,pos.z2+w,20)
+      mc.setBlock(pos.x,pos.y2-1,pos.z2+w,20)
 
-for y in range(7):
-    mc.setBlock(pos.x+x,pos.y+y,pos.z+z,45)
     for x in range(10):
       mc.setBlock(pos.x+x,pos.y+y,pos.z+z,45)
       mc.setBlock(pos.x+x,pos.y+y,pos.z,45)
+      for w in range(2):
+       mc.setBlock(pos.x+5,pos.y+w,pos.z,0)
+      
